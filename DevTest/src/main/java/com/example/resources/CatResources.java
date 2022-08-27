@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,17 +16,18 @@ import com.example.domain.Cat;
 	//old responsebody
 	@RestController
 	// endpoint
-	@RequestMapping (value = "/cats")
+	@RequestMapping (value="/cats")
 	public class CatResources {
+		
+		@Autowired
+		private CatService service;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Cat> findALL(){
-	
-	Cat fluffy = new Cat ("1" , "Fluffy");
-	Cat bottoms = new Cat ("2" , "Bottoms");
-	List<Cat> list = new ArrayList<>();
-	list.addAll(Arrays.asList(fluffy, bottoms));
-	return list;
-	
+	public ResponseEntity<List<Cat>> findALL(){
+	List<User> list = service.findAll();
+	return ResponseEntity.ok().body(list);
+		
+		
+		
 	}
 }
