@@ -14,14 +14,13 @@ import com.example.services.CatServices;
 	
 	//old responsebody
 	@RestController
-	// endpoint
-	@RequestMapping(value = "/cats")
+		
 	public class CatResources {
 		
 		@Autowired
 		private CatServices service;
 	
-		@RequestMapping(method=RequestMethod.GET)
+		@RequestMapping(value = "/cats", method=RequestMethod.GET)
 		public ResponseEntity<List<Cat>> findALL(){
 		List<Cat> list = service.findAll();
 		return ResponseEntity.ok().body(list);
